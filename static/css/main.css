@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: #1D1D1D;
+    --accent-color: #4F9DA6;
+    --second-color: #E0E0E0;
+    --accept: #1DB954;
+    --decline: #D32F2F;
+    --transition: ease-in-out .3s;
+}
+
+body {
+    background-color: var(--main-color);
+    display: grid;
+    width: 100vw;
+    height: 100dvh;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 9fr;
+    justify-items: center;
+}
+
+a, h1, h2, h3, h4, h5, h6, span, p, label {
+    color: var(--second-color);
+    font-family: "Roboto", serif;
+}

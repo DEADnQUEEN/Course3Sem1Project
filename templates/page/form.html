@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block load %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form class="form-box" method="post" autocomplete="off">
+        {% csrf_token %}
+        <a id="form-name">{{ title }}</a>
+        <div class="form-fields">
+            {% for field in form %}
+                <label class="form-label" id="label-{{ field.id_for_label }}">
+                    <a class="label-content">{{ field.label }}</a>
+                    {{ field.as_widget }}
+                </label>
+            {% endfor %}
+        </div>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,88 @@
+form.form-box {
+    align-self: center;
+    justify-self: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    border: 5px solid var(--accent-color);
+    border-radius: 20px;
+}
+
+div.form-fields {
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label.form-label{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label.form-label > a {
+    font-weight: bold;
+    text-indent: 10px;
+    font-size: 20px;
+}
+
+a#form-name {
+    align-self: center;
+    font-weight: bolder;
+    font-size: 28px;
+    padding: 0 40px;
+}
+
+input.form-input {
+    background-color: var(--second-color);
+    border-radius: 10px;
+    border: 3px solid var(--second-color);
+    color: var(--main-color);
+    padding: 10px 10px;
+    transition: var(--transition);
+    outline: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+input.form-input::placeholder {
+    color: var(--main-color);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input.form-input:hover,
+input.form-input:invalid:hover {
+    border-color: var(--accent-color);
+}
+
+input.form-input:valid, input.form-input:valid:hover {
+    border-color: var(--accept);
+}
+
+input.form-input:invalid {
+    border-color: var(--decline);
+}
+
+input.form-input:placeholder-shown {
+    border-color: var(--second-color);
+}
+
+button#submit {
+    padding: 10px 40px;
+    width: fit-content;
+    background-color: var(--main-color);
+    border: 3px solid var(--second-color);
+    color: var(--accent-color);
+    align-self: center;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+button#submit:hover {
+    background-color: var(--second-color);
+    color: var(--main-color);
+}

@@ -1,0 +1,15 @@
+.link {
+    border: 4px solid var(--second-color);
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: var(--transition);
+}
+
+.link:hover {
+    background-color: var(--accent-color);
+    color: var(--main-color);
+    border-color: var(--accent-color);
+}

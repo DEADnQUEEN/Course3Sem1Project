@@ -1,0 +1,11 @@
+{% load filters %}
+
+<div class="left-bar">
+    {% for class, group in user|get_left_bar|get_items %}
+        <div class="group {{ class }}">
+            {% for id, content in group.items %}
+                <a id="{{ id }}" {% for key, arg in content.args.items %}{{ key }}="{{ arg }}"{% endfor %}>{{ content.value|capfirst }}</a>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

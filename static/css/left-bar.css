@@ -1,0 +1,18 @@
+.left-bar {
+    padding: 60px 0;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.group {
+    gap: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    display: flex;
+    flex-direction: row;
+}
