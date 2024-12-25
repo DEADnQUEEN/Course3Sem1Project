@@ -9,18 +9,6 @@ base = {
 
 @register.filter
 def get_left_bar(user: models.User):
-    out = {
-        'logout': {
-            'quit': {
-                'args': {
-                    'class': 'link',
-                    'href': '/logout/'
-                },
-                'value': 'quit'
-            }
-        }
-    }
-
     if not user.is_authenticated:
         return {
             'login': {
@@ -38,6 +26,37 @@ def get_left_bar(user: models.User):
                     },
                     'value': 'register'
                 }
+            }
+        }
+
+    out = {
+        'name': {
+            'name': {
+                'args': {
+                    'class': 'text',
+                },
+                'value': user.human.name_initials
+            },
+        },
+        'logout': {
+            'quit': {
+                'args': {
+                    'class': 'link',
+                    'href': '/logout/'
+                },
+                'value': 'Выйти'
+            }
+        }
+    }
+
+    if user.can_add_payment:
+        out['add'] = {
+            'payments': {
+                'args': {
+                    'class': 'link',
+                    'href': '/payments/add/'
+                },
+                'value': 'Добавить оплату'
             }
         }
 

@@ -27,10 +27,21 @@ class Human(models.Model):
         db_table = 'Human'
 
     @property
-    def full_name(self):
+    def __name_list(self):
         full_name = [self.surname, self.name]
         if self.father_name is not None:
             full_name.append(self.father_name)
+        return full_name
+
+    @property
+    def full_name(self):
+        return ' '.join(self.__name_list)
+
+    @property
+    def name_initials(self):
+        full_name = self.__name_list
+        for i in range(1, len(full_name)):
+            full_name[i] = full_name[i][0].upper() + '.'
         return ' '.join(full_name)
 
     def __str__(self):
@@ -95,11 +106,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def is_stand_alone(self):
-        return Connect.objects.filter(user_id=self.id) > 0
+        return len(Connect.objects.filter(user_id=self.id)) == 0
 
     @property
     def is_ceo(self):
-        return Organization.objects.filter(ceo__id__exact=self.id) > 0
+        return len(Organization.objects.filter(ceo=self)) > 0
+
+    @property
+    def can_add_payment(self):
+        return len(Connect.objects.filter(user_id=self.id)) == 0 or len(Organization.objects.filter(ceo=self)) > 0
 
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = [login, password]

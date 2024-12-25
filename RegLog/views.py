@@ -1,8 +1,25 @@
 import django.http
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import django.contrib.auth
 from . import models, forms
 from django.contrib import messages
+
+
+def not_allowed(request: django.http.HttpRequest) -> django.http.HttpResponse:
+    return render(request, 'page/not-allowed.html', {'title': 'Why are you here? | Почему ты здесь?'})
+
+
+def main(request: django.http.HttpRequest) -> django.http.HttpResponse:
+    if not request.user.is_authenticated:
+        return redirect('/login/')
+
+    return render(
+        request,
+        'page/main.html',
+        {
+            'title': 'Main page'
+        }
+    )
 
 
 def login(request: django.http.HttpRequest) -> django.http.HttpResponse:
@@ -41,7 +58,7 @@ def login(request: django.http.HttpRequest) -> django.http.HttpResponse:
         )
 
     django.contrib.auth.login(request, user)
-    return render(request, 'page/html.html')
+    return redirect('/')
 
 
 def register(request: django.http.HttpRequest) -> django.http.HttpResponse:
@@ -62,17 +79,25 @@ def register(request: django.http.HttpRequest) -> django.http.HttpResponse:
             request,
             'page/form.html',
             {
-                'title': 'Вход',
+                'title': 'Регистрация',
                 'form': form
             }
         )
 
     user = form.save()
 
-    if user is not None:
-        django.contrib.auth.login(request, user)
+    if user is None:
+        return render(
+            request,
+            'page/form.html',
+            {
+                'title': 'Регистрация',
+                'form': form
+            }
+        )
 
-    return render(request, 'page/html.html')
+    django.contrib.auth.login(request, user)
+    return redirect('/')
 
 
 def logout(request: django.http.request.HttpRequest) -> django.http.response.HttpResponse:
