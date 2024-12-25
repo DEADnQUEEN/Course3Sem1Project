@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block load %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/not-allowed.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="not-allowed">
+        <div id="en">
+            <h1>Hey, you are not allowed to be here</h1>
+            <h2>Please <a href="javascript:history.back()">go back</a></h2>
+            <h2>or go to a <a href="/">Main page</a></h2>
+        </div>
+        <div id="ru">
+            <h1>Привет, ты не должен был оказаться здесь</h1>
+            <h2>Пожалуйста вернись <a href="javascript:history.back()">Назад</a></h2>
+            <h2>или на <a href="/">Главную страницу</a></h2>
+        </div>
+    </div>
+{% endblock %}

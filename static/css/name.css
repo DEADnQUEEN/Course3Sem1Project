@@ -1,0 +1,27 @@
+.name {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+}
+
+.name > a {
+    display: inline-flex;
+    width: 100%;
+    font-size: 24px;
+}
+
+.name > a:before {
+    top: -5px;
+    bottom: -5px;
+    border-radius: 5px;
+    width: 3px;
+    margin-right: 5px;
+    content: '';
+    background-color: var(--second-color);
+    transition: var(--transition);
+}
+
+.name:hover > a:before{
+    background-color: var(--accent-color);
+}

@@ -1,0 +1,19 @@
+.not-allowed {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 40px;
+}
+
+.not-allowed > div {
+    padding: 20px;
+    border-radius: 20px;
+    border: 5px solid var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.not-allowed > div > h1 {
+    padding: 10px 0 5px 0;
+}
