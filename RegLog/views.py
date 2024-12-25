@@ -2,6 +2,7 @@ import django.http
 from django.shortcuts import render
 import django.contrib.auth
 from . import models, forms
+from django.contrib import messages
 
 
 def login(request: django.http.HttpRequest) -> django.http.HttpResponse:
@@ -29,9 +30,17 @@ def login(request: django.http.HttpRequest) -> django.http.HttpResponse:
 
     user = models.User.objects.filter(login__exact=form.data['login']).first()
 
-    if user is not None:
-        django.contrib.auth.login(request, user)
+    if user is None:
+        messages.error(request, 'Логин или пароль неверный')
+        return render(
+            request,
+            'page/form.html', {
+                'title': 'Вход',
+                'form': form
+            }
+        )
 
+    django.contrib.auth.login(request, user)
     return render(request, 'page/html.html')
 
 

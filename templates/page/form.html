@@ -18,6 +18,18 @@
                 </label>
             {% endfor %}
         </div>
+        {% if messages|length > 0 or form.errors|length %}
+            <div class="error-messages">
+                {% for errors in form.errors.values %}
+                    {% for error in errors %}
+                        <a class="error-message">{{ error }}</a>
+                    {% endfor %}
+                {% endfor %}
+                {% for message in messages %}
+                    <a class="error-message">{{ message }}</a>
+                {% endfor %}
+            </div>
+        {% endif %} 
         <button type="submit" id="submit">Submit</button>
     </form>
 {% endblock %}
