@@ -1,0 +1,25 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 60px 0;
+}
+
+#content > h1 {
+    font-size: 32px;
+    font-weight: bolder;
+    text-align: center;
+    justify-self: center;
+}
+
+#full-name {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#full-name > a {
+    font-weight: bold;
+    font-size: 24px;
+}

@@ -1,0 +1,8 @@
+<div class="payments">
+{% for payment in payments %}
+    <div class="payment {% if payment.sum < 0 %}minus{% else %}plus{% endif %}">
+        <a class="payday">{{ payment.date }}</a>
+        <a class="pay">{{ payment.sum }}</a>
+    </div>
+{% endfor %}
+</div>

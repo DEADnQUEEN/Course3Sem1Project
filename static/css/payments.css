@@ -1,0 +1,95 @@
+.payment {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid;
+    transition: var(--transition);
+    align-items: center;
+}
+
+.payment.plus {
+    border-color: var(--accept);
+}
+
+.payment.plus:hover{
+    background-color: var(--accept);
+}
+
+.payment.minus {
+    border-color: var(--decline);
+}
+
+.payment.minus:hover{
+    background-color: var(--decline);
+}
+
+.payment > a {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--second-color);
+    text-align: center;
+}
+
+.payment > a.pay{
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.payment > a:after {
+    content: ' ₽';
+}
+
+.payment.plus > a.pay {
+    color: var(--accept);
+}
+
+.payment.minus > a.pay {
+    color: var(--decline);
+}
+
+.payment.plus:hover > a.pay,
+.payment.minus:hover > a.pay {
+    background-color: var(--second-color);
+}
+
+.payment:hover > a{
+    color: var(--main-color);
+}
+
+
+.payments {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0 20px;
+}
+
+.payments::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+.payments::-webkit-scrollbar-track,
+.payments::-webkit-scrollbar-track:hover,
+.payments::-webkit-scrollbar-track:active {
+    background-color: var(--main-color);
+}
+
+.payments::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--second-color);
+}
+
+.payments::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color);
+}
+
+.payments::-webkit-scrollbar-thumb:active {
+  background-color: var(--accent-color);
+}
