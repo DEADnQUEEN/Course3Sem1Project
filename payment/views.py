@@ -28,7 +28,7 @@ def add(request: django.http.HttpRequest) -> django.http.HttpResponse:
     if request.method == 'POST':
         print(request.body)
         models.Payment.objects.create(user=user, **json.loads(request.body)).save()
-        return django.http.response.JsonResponse({'app': get_last_payments(user, 5)})
+        return django.http.response.JsonResponse({'payments': list(get_last_payments(user, 6))})
 
     return render(
         request,

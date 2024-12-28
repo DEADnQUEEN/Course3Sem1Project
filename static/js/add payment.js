@@ -1,7 +1,18 @@
 window.onload = () => {
     let d = new Date();
     document.getElementById('date').value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDay() + 1).padStart(2, '0');
-    let early = document.getElementById('early-payments')
+    let early = document.querySelector('#early-payments')
+
+    for (let i = 0; i < early.children.length; i++){
+        early.children[i].addEventListener(
+            'click',
+            (ev) => {
+                ev.preventDefault()
+                document.getElementById('amount').value = early.children[i].textContent
+            }
+        )
+    }
+
     let values = document.querySelectorAll('.add-payment-block > label > input');
 
     let timeout = {}
@@ -53,7 +64,15 @@ window.onload = () => {
 
                 xhr.onload = () => {
                     if (xhr.status === 200){
-                        console.log(xhr.response)
+                        let data = JSON.parse(xhr.response)
+                        early.innerHTML = ''
+                        console.log(data)
+                        for (let j = 0; j < data['payments'].length; j++) {
+                            let pay = document.createElement('a')
+                            pay.classList.add('payment-block')
+                            pay.textContent = data['payments'][j]['amount_value']
+                            early.appendChild(pay)
+                        }
                         return;
                     }
                     console.log('Error ' + xhr.status)

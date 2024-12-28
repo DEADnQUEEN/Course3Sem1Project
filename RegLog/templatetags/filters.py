@@ -67,4 +67,4 @@ def get_items(obj: dict):
 
 @register.filter
 def get_most_payments(user: models.User):
-    return get_last_payments(user, 5)
+    return get_last_payments(user, 6)
