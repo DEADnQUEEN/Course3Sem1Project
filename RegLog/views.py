@@ -17,8 +17,7 @@ def main(request: django.http.HttpRequest) -> django.http.HttpResponse:
         request,
         'page/main.html',
         {
-            'title': 'Main page',
-            'payments': models.Payment.objects.filter(user=request.user)
+            'title': 'Main page'
         }
     )
 

@@ -11,6 +11,7 @@
     font-size: 24px;
 }
 
+#full-name:before,
 .name > a:before {
     top: -5px;
     bottom: -5px;
@@ -22,6 +23,7 @@
     transition: var(--transition);
 }
 
+#full-name:hover:before,
 .name:hover > a:before{
     background-color: var(--accent-color);
 }

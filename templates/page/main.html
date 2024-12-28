@@ -1,9 +1,20 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load filters %}
 
 {% block load %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/payments.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main page.css' %}">
 {% endblock %}
 
 {% block content %}
-
+    <div id="content">
+        <h1>Заработная плата</h1>
+        <div id="full-name">
+            <a id="surname">{{ user.human.surname|capfirst }}</a>
+            <a id="name">{{ user.human.name|capfirst }}</a>
+            <a id="father-name">{{ user.human.father_name|capfirst }}</a>
+        </div>
+        {% include 'base/payment list.html' with payments=user|get_payments %}
+    </div>
 {% endblock %}

@@ -22,7 +22,17 @@ body {
     justify-items: center;
 }
 
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Roboto'),
+       url('../font/Roboto-Bold.ttf') format("truetype");
+}
+
+
 a, h1, h2, h3, h4, h5, h6, span, p, label {
     color: var(--second-color);
     font-family: "Roboto", serif;
+    text-decoration: none;
 }
