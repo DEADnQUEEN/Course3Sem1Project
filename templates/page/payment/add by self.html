@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block load %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add payment.css' %}">
+    <script src="{% static 'js/add payment.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="add-payment-block">
+        {% csrf_token %}
+        <h1>Добавить выплату</h1>
+        <label for="date">
+            <a>Дата</a>
+            <input type="date" id="date">
+            <span class="error" id="date-error">Поле должно быть заполненно</span>
+        </label>
+        <label for="amount">
+            <a>Количество</a>
+            <input type="number" id="amount" placeholder="Количество">
+            <span class="error" id="amount-error">Поле неправильно заполненно</span>
+        </label>
+        <div id="early-payments">
+            {% for payment in user|get_most_payments %}
+                <a class="payment-block">{{ payment.amount_value }}</a>
+            {% endfor %}
+        </div>
+        <div class="buttons">
+            <button id="add-payment" value="+">Начислить</button>
+            <button id="remove-payment" value="-">Снять</button>
+        </div>
+    </div>
+{% endblock %}

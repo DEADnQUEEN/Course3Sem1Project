@@ -1,5 +1,6 @@
 from django import template
 from .. import models
+from payment.views import get_last_payments
 
 register = template.Library()
 base = {
@@ -29,7 +30,7 @@ def get_left_bar(user: models.User):
             }
         }
 
-    out = {
+    return {
         'name': {
             'name': {
                 'args': {
@@ -46,11 +47,8 @@ def get_left_bar(user: models.User):
                 },
                 'value': 'Выйти'
             }
-        }
-    }
-
-    if user.can_add_payment:
-        out['add'] = {
+        },
+        'add': {
             'payments': {
                 'args': {
                     'class': 'link',
@@ -59,10 +57,14 @@ def get_left_bar(user: models.User):
                 'value': 'Добавить оплату'
             }
         }
-
-    return out
+    }
 
 
 @register.filter
 def get_items(obj: dict):
     return obj.items()
+
+
+@register.filter
+def get_most_payments(user: models.User):
+    return get_last_payments(user, 5)

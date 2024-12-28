@@ -1,3 +1,4 @@
+import datetime
 import random
 import string
 
@@ -14,6 +15,10 @@ def create_key():
             key[i] += random.choice(string.ascii_letters)
 
     return '-'.join(key)
+
+
+def date():
+    return datetime.date.today()
 
 
 class Human(models.Model):
@@ -104,18 +109,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         super().__init__(*args, **kwargs)
         self.payments = Payment.objects.filter(user_id=self.id)
 
-    @property
-    def is_stand_alone(self):
-        return len(Connect.objects.filter(user_id=self.id)) == 0
-
-    @property
-    def is_ceo(self):
-        return len(Organization.objects.filter(ceo=self)) > 0
-
-    @property
-    def can_add_payment(self):
-        return len(Connect.objects.filter(user_id=self.id)) == 0 or len(Organization.objects.filter(ceo=self)) > 0
-
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = [login, password]
 
@@ -131,36 +124,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         return str(self.human)
 
 
-class Organization(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    name = models.TextField(db_column='Name', null=False)
-    key = models.TextField(db_column='Key', null=False, default=create_key)
-    ceo = models.ForeignKey(User, models.DO_NOTHING, null=False, blank=False)
-
-    class Meta:
-        managed = True
-        db_table = 'Organization'
-        verbose_name = "Компании"
-
-    def __str__(self):
-        return self.name
-
-
-class Connect(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    user = models.ForeignKey(User, models.DO_NOTHING, null=False, blank=False)
-    organization = models.ForeignKey(Organization, models.DO_NOTHING, null=False, blank=False)
-
-    class Meta:
-        managed = True
-        db_table = "Connections"
-        verbose_name = "Соединение"
-
-
 class Payment(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
     user = models.ForeignKey(User, models.DO_NOTHING, null=False, blank=False)
     amount = models.IntegerField(db_column='Amount', null=False, blank=False, default=0)
+    date = models.DateField(db_column='Date', null=False, blank=False, default=datetime.date.today)
 
     class Meta:
         managed = True

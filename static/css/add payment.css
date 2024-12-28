@@ -1,0 +1,119 @@
+.add-payment-block {
+    width: fit-content;
+    height: fit-content;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding: 20px;
+    border: 5px solid var(--accent-color);
+    border-radius: 40px;
+}
+
+.add-payment-block > label {
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+
+.add-payment-block > h1 {
+    font-size: 28px;
+    font-weight: bolder;
+    align-self: center;
+}
+
+.add-payment-block > label > a {
+    font-size: 20px;
+    font-weight: bold;
+    text-indent: 20px;
+    margin-bottom: 10px;
+}
+
+.add-payment-block > label > input {
+    padding: 10px 20px;
+    border: 3px solid var(--second-color);
+    background-color: var(--second-color);
+    color: var(--main-color);
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    outline: none;
+    transition: var(--transition);
+    appearance: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.add-payment-block > label > input:hover {
+    border-color: var(--accent-color);
+}
+
+.add-payment-block > label > input:not(:placeholder-shown):not(#date):hover {
+    border-color: var(--accept);
+}
+
+.add-payment-block > label > input:placeholder-shown{
+    border-color: var(--decline);
+}
+
+div.buttons {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+div.buttons > button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: transparent;
+    border: 2px solid;
+    font-weight: bold;
+    font-size: 20px;
+    outline: none;
+    color: var(--second-color);
+    transition: var(--transition);
+}
+
+#add-payment {
+    border-color: var(--accept);
+}
+
+#remove-payment {
+    border-color: var(--decline);
+}
+
+#add-payment:hover {
+    background-color: var(--accept);
+}
+
+#remove-payment:hover {
+    background-color: var(--decline);
+}
+
+div.buttons > button:hover {
+    background-color: var(--second-color);
+    color: var(--main-color);
+}
+
+.error {
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    margin-top: 0;
+    transition: var(--transition);
+    text-indent: 0;
+    text-align: center;
+}
+
+.error.visible {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--decline);
+}
