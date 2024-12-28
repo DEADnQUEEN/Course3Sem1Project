@@ -26,7 +26,6 @@ def add(request: django.http.HttpRequest) -> django.http.HttpResponse:
         return redirect('/not-allowed')
 
     if request.method == 'POST':
-        print(request.body)
         models.Payment.objects.create(user=user, **json.loads(request.body)).save()
         return django.http.response.JsonResponse({'payments': list(get_last_payments(user, 6))})
 

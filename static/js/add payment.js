@@ -20,7 +20,7 @@ window.onload = () => {
         timeout[values[i].id] = -1
         values[i].addEventListener(
             'input',
-            (ev) => {
+            () => {
                 if (values[i].value === '0'){
                     values[i].setCustomValidity('Недопустимое значение')
                 }
@@ -66,7 +66,7 @@ window.onload = () => {
                     if (xhr.status === 200){
                         let data = JSON.parse(xhr.response)
                         early.innerHTML = ''
-                        console.log(data)
+
                         for (let j = 0; j < data['payments'].length; j++) {
                             let pay = document.createElement('a')
                             pay.classList.add('payment-block')
