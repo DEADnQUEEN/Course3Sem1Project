@@ -2,6 +2,7 @@ import django.http
 import django.contrib.auth
 from django.shortcuts import render, redirect
 from django.contrib import messages
+import typing
 from RegLog import models
 import json
 from django.db.models import Count, When, Case, F
@@ -47,10 +48,29 @@ def add_for_company(request: django.http.HttpRequest, index) -> django.http.Http
     if len(user.director_list) < index:
         return redirect('/wrong-company')
 
-    if request.method == 'POST':
-        raise NotImplementedError()
-
     company: models.Company = user.director_list[index]
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        workers = models.User.objects.filter(company=company)
+        print(not len(workers) > data['index'])
+        if not len(workers) > data['index']:
+            return django.http.response.HttpResponse(
+                'Not Found!',
+                'application/json'
+            )
+
+        worker = workers[data['index']]
+
+        payment = models.Payment.objects.create(user=worker, **data['payment'])
+
+        payment.save()
+        print('Saved!')
+
+        return django.http.response.HttpResponse(
+            'Saved!',
+            'application/json'
+        )
 
     return render(
         request,
@@ -58,4 +78,25 @@ def add_for_company(request: django.http.HttpRequest, index) -> django.http.Http
         {
             'company': company,
         }
+    )
+
+
+def refresh_company_code(request: django.http.HttpRequest, index) -> typing.Union[
+    django.http.HttpResponse, django.http.Http404
+]:
+    user: models.User = request.user
+
+    if request.method != 'POST':
+        return redirect('/not-allowed')
+
+    if len(user.director_list) < index:
+        return django.http.Http404()
+
+    company: models.Company = user.director_list[index]
+    company.key = models.create_key()
+    company.save()
+
+    return django.http.response.HttpResponse(
+        json.dumps({'key': company.key}),
+        'application/json'
     )

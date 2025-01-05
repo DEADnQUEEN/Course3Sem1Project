@@ -1,6 +1,5 @@
 window.onload = () => {
-    let d = new Date();
-    document.getElementById('date').value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDay() + 1).padStart(2, '0');
+    fill_dates()
     let early = document.querySelector('#early-payments')
 
     for (let i = 0; i < early.children.length; i++){

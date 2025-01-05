@@ -64,7 +64,7 @@
     border-color: var(--accent-color);
 }
 
-.worker-input:not(.date):not(:placeholder-shown):invalid {
+.worker-input:not(.date):invalid {
     border-color: var(--decline);
 }
 
