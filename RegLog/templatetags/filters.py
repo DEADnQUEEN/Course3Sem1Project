@@ -4,9 +4,27 @@ from payment.views import get_last_payments
 from django.db.models import Sum
 
 register = template.Library()
-base = {
-    ''
-}
+
+
+@register.filter
+def get_company_list(user: models.User):
+    return {
+        f'company-{i}': {
+            'args': {
+                'class': 'link',
+                'href': f'/payments/add-for-company-{i}/'
+            },
+            'value': 'Управление компанией "' + company.name + '"'
+        }
+        for i, company in enumerate(user.director_list)
+    }
+
+
+@register.filter
+def get_company_workers(user: models.User, company: models.Company):
+    if not user.is_authenticated or user.id != company.director.id:
+        raise ValueError()
+    return models.User.objects.filter(company=company)
 
 
 @register.filter
@@ -31,7 +49,7 @@ def get_left_bar(user: models.User):
             }
         }
 
-    return {
+    out = {
         'name': {
             'name': {
                 'args': {
@@ -49,8 +67,11 @@ def get_left_bar(user: models.User):
                 },
                 'value': 'Выйти'
             }
-        },
-        'add': {
+        }
+    }
+
+    if not len(models.Connect.objects.filter(user=user)):
+        out['add'] = {
             'payments': {
                 'args': {
                     'class': 'link',
@@ -59,7 +80,10 @@ def get_left_bar(user: models.User):
                 'value': 'Добавить оплату'
             }
         }
-    }
+
+    out['companies'] = get_company_list(user)
+
+    return out
 
 
 @register.filter

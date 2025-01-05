@@ -112,6 +112,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = [login, password]
 
+    @property
+    def director_list(self):
+        return Company.objects.filter(director=self)
+
+    @property
+    def can_set_payment(self):
+        return len(self.director_list) or len(Connect.objects.filter(user=self))
+
     class Meta:
         managed = True
         db_table = 'User'
@@ -134,3 +142,26 @@ class Payment(models.Model):
         managed = True
         db_table = "Payments"
         verbose_name = "Оплаты"
+
+
+class Company(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    name = models.TextField(db_column='Name', null=False, blank=False)
+    director = models.ForeignKey(User, models.DO_NOTHING, null=False, blank=False)
+    key = models.TextField(db_column='Key', null=False, default=create_key)
+
+    class Meta:
+        managed = True
+        db_table = "Company"
+        verbose_name = "Компании"
+
+
+class Connect(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    user = models.ForeignKey(User, models.DO_NOTHING, null=False, blank=False)
+    company = models.ForeignKey(Company, models.DO_NOTHING, null=False, blank=False)
+
+    class Meta:
+        managed = True
+        db_table = "Connect"
+        verbose_name = "Соединение"

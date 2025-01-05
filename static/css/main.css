@@ -18,7 +18,7 @@ body {
     width: 100vw;
     height: 100dvh;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 9fr;
+    grid-template-columns: 3fr 17fr;
     justify-items: center;
 }
 

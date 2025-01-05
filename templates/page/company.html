@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block load %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/add payment.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/company.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/company head.css' %}">
+    <script src="{% static 'js/add worker payument.js' %}"></script>
+    <title>Управление "{{ company.name }}"</title>
+{% endblock %}
+
+{% block content %}
+    <div id="company">
+        <div id="company-head">
+            <div>
+                <a>Компания "</a><a id="company-name" href=".">{{ company.name }}</a><a>"</a>
+            </div>
+            <div>
+                <a id="company-key">{{ company.key }}</a>
+                <a id="key-copied-message">Код Скопирован</a>
+            </div>
+        </div>
+        <div id="workers">
+            {% csrf_token %}
+            {% for worker in user|get_company_workers:company %}
+                <a id="worker-number-{{ forloop.counter }}">{{ forloop.counter }}</a>
+                <a id="worker-name-{{ forloop.counter }}">{{ worker.human.name_initials }}</a>
+                <label for="worker-{{ forloop.counter }}-date">
+                    <a>Дата</a>
+                    <input id="worker-{{ forloop.counter }}-date" placeholder="Дата" class="date worker-input" type="date" name="date-{{ forloop.counter }}">
+                </label>
+                <label for="worker-{{ forloop.counter }}-amount">
+                    <a>Кол-во</a>
+                    <input id="worker-{{ forloop.counter }}-amount" placeholder="Количество" class="amount worker-input" type="number" name="amount-{{ forloop.counter }}">
+                </label>
+                <div class="buttons">
+                    <button class="add-payment" value="+">+</button>
+                    <button class="remove-payment" value="-">-</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

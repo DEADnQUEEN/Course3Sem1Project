@@ -9,6 +9,10 @@ def not_allowed(request: django.http.HttpRequest) -> django.http.HttpResponse:
     return render(request, 'page/not-allowed.html', {'title': 'Why are you here? | Почему ты здесь?'})
 
 
+def wrong_company(request: django.http.HttpRequest) -> django.http.HttpResponse:
+    return render(request, 'page/wrong company.html', {'title': 'Why are you here? | Почему ты здесь?'})
+
+
 def main(request: django.http.HttpRequest) -> django.http.HttpResponse:
     if not request.user.is_authenticated:
         return redirect('/login/')

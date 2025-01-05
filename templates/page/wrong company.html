@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load filters %}
+
+{% block load %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/not-allowed.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="not-allowed">
+        <div id="en">
+            <h1>Hey, you are not allowed to be here</h1>
+            <h2>Please <a href="javascript:history.back()">go back</a></h2>
+            <h2>or go to any company:</h2>
+            {% for data in user|get_company_list %}
+                <div class="group {{ class }}">
+                    {% for id, content in group.items %}
+                        <a id="{{ id }}" {% for key, arg in content.args.items %}{{ key }}="{{ arg }}"{% endfor %}>{{ content.value|capfirst }}</a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div id="ru">
+            <h1>Привет, ты не должен был оказаться здесь</h1>
+            <h2>Пожалуйста вернись <a href="javascript:history.back()">Назад</a></h2>
+            <h2>Или перейди на одну из компаний ниже:</h2>
+            {% for data in user|get_company_list %}
+                <div class="group {{ class }}">
+                    {% for id, content in group.items %}
+                        <a id="{{ id }}" {% for key, arg in content.args.items %}{{ key }}="{{ arg }}"{% endfor %}>{{ content.value|capfirst }}</a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

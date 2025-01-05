@@ -1,0 +1,71 @@
+#company-head {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+#company-head > div {
+    margin: 10px 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+#company-head a {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#company-head a#company-name {
+    transition: var(--transition);
+
+}
+
+#company-head a#company-name:hover {
+    color: var(--accent-color);
+}
+
+#company-key {
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    border: 3px solid var(--accent-color);
+    transition: var(--transition);
+}
+
+#company-key:hover {
+    background-color: var(--second-color);
+    border-color: var(--second-color);
+    color: var(--main-color);
+}
+
+#company-key:active {
+    background-color: var(--accept);
+    border-color: var(--accept);
+}
+
+#company-head > div > #key-copied-message {
+    position: fixed;
+    opacity: 0;
+    padding: 10px 20px;
+    font-size: 20px;
+    color: var(--second-color);
+    background-color: var(--accept);
+    transition: var(--transition);
+    bottom: 5%;
+    left: 50%;
+}
+
+#company-head > div:last-child {
+    gap: 20px;
+}
+
+#refresh-code {
+    aspect-ratio: 1 / 1;
+    height: 32px;
+    padding: 10px;
+    border: 3px solid var(--accent-color);
+    fill: var(--second-color);
+}

@@ -31,8 +31,31 @@ def add(request: django.http.HttpRequest) -> django.http.HttpResponse:
 
     return render(
         request,
-        'page/payment/add by self.html',
+        'page/add by self.html',
         {
             'title': 'Добавить оплату',
+        }
+    )
+
+
+def add_for_company(request: django.http.HttpRequest, index) -> django.http.HttpResponse:
+    user: models.User = request.user
+
+    if not user.is_authenticated:
+        return redirect('/not-allowed')
+
+    if len(user.director_list) < index:
+        return redirect('/wrong-company')
+
+    if request.method == 'POST':
+        raise NotImplementedError()
+
+    company: models.Company = user.director_list[index]
+
+    return render(
+        request,
+        'page/company.html',
+        {
+            'company': company,
         }
     )

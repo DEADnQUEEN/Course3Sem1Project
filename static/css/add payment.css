@@ -43,16 +43,17 @@
     appearance: none;
 }
 
-input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+.add-payment-block > label > input:focus,
 .add-payment-block > label > input:hover {
     border-color: var(--accent-color);
 }
 
+.add-payment-block > label > input:not(:placeholder-shown):not(#date):focus,
 .add-payment-block > label > input:not(:placeholder-shown):not(#date):hover {
     border-color: var(--accept);
 }
@@ -80,25 +81,28 @@ div.buttons > button {
     transition: var(--transition);
 }
 
-#add-payment {
-    border-color: var(--accept);
-}
-
-#remove-payment {
-    border-color: var(--decline);
-}
-
-#add-payment:hover {
-    background-color: var(--accept);
-}
-
-#remove-payment:hover {
-    background-color: var(--decline);
-}
-
+div.buttons > button:focus
 div.buttons > button:hover {
     background-color: var(--second-color);
     color: var(--main-color);
+}
+
+div.buttons > button.add-payment {
+    border-color: var(--accept);
+}
+
+div.buttons > button.remove-payment {
+    border-color: var(--decline);
+}
+
+div.buttons > button.add-payment:focus,
+div.buttons > button.add-payment:hover {
+    background-color: var(--accept);
+}
+
+div.buttons > button.remove-payment:focus,
+div.buttons > button.remove-payment:hover {
+    background-color: var(--decline);
 }
 
 .error {
@@ -136,11 +140,12 @@ div.buttons > button:hover {
     transition: var(--transition);
 }
 
-.payment-block:hover{
+.payment-block:focus,
+.payment-block:hover {
     background-color: var(--accent-color);
     color: var(--main-color);
 }
 
-.payment-block:after{
+.payment-block:after {
     content: ' ₽';
 }

@@ -3,6 +3,9 @@
     gap: 20px;
     display: flex;
     flex-direction: column;
+    box-shadow: 6px 0 var(--accent-color);
+    justify-self: flex-start;
+    width: -webkit-fill-available;
 }
 
 .group {
@@ -10,6 +13,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    width: fit-content;
 }
 
 .login {
